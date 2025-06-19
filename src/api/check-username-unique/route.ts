@@ -20,6 +20,8 @@ const UsernameQuerySchema = z.object({
   username: usernameValidation, // Reuses validation rules from sign-up
 });
 
+
+
 // Define the handler function for a GET request
 export async function GET(request: Request) {
   // Step 1: Connect to the MongoDB database
@@ -88,3 +90,12 @@ export async function GET(request: Request) {
   } catch (error) {
     // Step 8: Catch any unexpected errors (like DB connection issues)
     console.error("Error checking username:", error); // Helpful for debug
+    return Response.json(
+      {
+        success: false,
+        message: 'Error checking username',
+      },
+      { status: 500 }
+    );
+  }
+}

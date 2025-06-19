@@ -4,6 +4,13 @@ import bcrypt from 'bcryptjs';
 import dbConnect from '@/lib/db';
 import UserModel from '@/models/User';
 
+
+//This file is your NextAuth configuration (authOptions) for implementing authentication in your Next.js app — specifically using Credentials-based login (like email/username and password).
+
+
+
+
+
 // Main NextAuth configuration object
 export const authOptions: NextAuthOptions = {
   providers: [
