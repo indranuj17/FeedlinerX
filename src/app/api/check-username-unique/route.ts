@@ -4,15 +4,13 @@
 
 // Import the database connection utility to connect to MongoDB
 import dbConnect from "@/lib/db";
-
 // Import Zod library for runtime schema validation
 import { z } from "zod";
-
 // Import the Mongoose User model to interact with the 'users' collection
 import UserModel from "@/models/User";
-
 // Import reusable username validation logic from signup schema
 import { usernameValidation } from "@/schemas/signUpSchema";
+
 
 // Define a Zod schema for validating query parameters of the request
 // This ensures that the 'username' in the query matches our expected format (e.g., no special characters, length constraints, etc.)
@@ -34,6 +32,8 @@ export async function GET(request: Request) {
     const queryParams = {
       username: searchParams.get("username"), // Get the value of the 'username' parameter from the URL
     };
+
+    console.log(queryParams.username);
 
     // Step 3: Validate the extracted query parameters using Zod
     // `safeParse` returns an object with either a success (data) or failure (error)
