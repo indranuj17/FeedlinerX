@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import "./globals.css"; // <-- make sure this is added
 import { Geist, Geist_Mono } from "next/font/google";
 
 import { Toaster } from "@/components/ui/toaster"
