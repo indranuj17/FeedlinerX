@@ -12,8 +12,7 @@ export async function POST(request: Request) {
 
     console.log(`${username} is sexy`)
 
-    // Decode URL-encoded username (e.g., "john%20doe" => "john doe")
-    // const decodedUsername = decodeURIComponent(username);
+
 
     // Find user in DB by username
     const user = await UserModel.findOne({ username });

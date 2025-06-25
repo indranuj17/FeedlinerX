@@ -12,12 +12,13 @@ export async function sendVerificationEmail(
 
     try {
 
-  resend.emails.send({
+  const result=await resend.emails.send({
   from: 'onboarding@resend.dev',
   to: email,
-  subject: 'Hello World',
+  subject: 'Verify Account',
   react:VerificationEmail({username:username,otp:verificationCode})
   });
+  console.log("Verification Email send result-",result);
     return { success: true, message: 'Verification email sent successfully.' };
      
     
