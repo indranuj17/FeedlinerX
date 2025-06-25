@@ -35,14 +35,18 @@ export default function verifyAccount() {
   const onSubmit = async (data: z.infer<typeof verifySchema>) => {
     try {
       // Send POST request to the backend with the username and verification code
+     
       const response = await axios.post<ApiResponse>(`/api/verify-code`, {
         username: params.username, // from URL
         code: data.code, // from input
       });
 
-      // ✅ On success: show toast and redirect to sign-in
+      if (response.data.success) {
       toast.success("Success", { description: response.data.message });
       router.replace("/sign-in");
+      } else {
+       toast.error("Verification Failed", { description: response.data.message });
+       }
     } catch (error) {
       // ✅ On error: show descriptive error toast
       const axiosError = error as AxiosError<ApiResponse>;

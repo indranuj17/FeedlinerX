@@ -80,12 +80,16 @@ export default function SignUpForm() {
     setIsSubmitting(true);
     try {
       const response = await axios.post<ApiResponse>('/api/sign-up', data);
-
+      
+      if(response.data.success){
       // Show success toast
       toast.success('Success', { description: response.data.message });
-
       // Redirect to verification page
       router.replace(`/verify/${username}`);
+      }
+      else{
+      toast.error("Registration failed",{description:response.data.message});
+      }
       
     } catch (error) {
       console.error('Error during sign-up:', error);

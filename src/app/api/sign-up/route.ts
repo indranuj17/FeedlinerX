@@ -9,6 +9,8 @@ export async function POST(request: Request) {
   try {
     const { username, email, password } = await request.json();
 
+    console.log(`recieved username in sign-up is ${username}`);
+
     const existingVerifiedUserByUsername = await UserModel.findOne({
       username,
       isVerified: true,
