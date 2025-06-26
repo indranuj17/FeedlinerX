@@ -1,6 +1,6 @@
 import dbConnect from "@/lib/db";
 import UserModel from "@/models/User";
-import { authOptions } from "@/app/api/auth/[...nextauth]/options";
+import { authOptions } from "../auth/[...nextauth]/option"; 
 import { getServerSession } from "next-auth";
 import { User } from "next-auth";
 import mongoose from "mongoose";
@@ -9,7 +9,7 @@ export async function GET(request: Request) {
   // Establish database connection
   await dbConnect();
 
-  // Get the currently authenticated user session using NextAuth
+  // Get the currently authenticated user session using NextAuth  / /to get user info
   const session = await getServerSession(authOptions);
   const _user: User = session?.user;
 
@@ -25,28 +25,27 @@ export async function GET(request: Request) {
   const userId = new mongoose.Types.ObjectId(_user._id);
 
   try {
-    // Aggregate the user document and sort their messages in reverse chronological order
+    // ✅ Aggregate pipeline to get sorted messages for the user
     const user = await UserModel.aggregate([
-      // 1. Match the document of the currently logged-in user
+      // 1️⃣ Match only the document belonging to the logged-in user
       { $match: { _id: userId } },
 
-      // 2. Deconstruct the `messages` array, so each message becomes a separate document
-      { $unwind: '$messages' },
+      // 2️⃣ Unwind the messages array — makes each message a separate document
+      // NOTE: preserveNullAndEmptyArrays keeps the doc even if messages is empty
+      { $unwind: { path: '$messages', preserveNullAndEmptyArrays: true } },
 
-      // 3. Sort these "flattened" message documents by their creation time (most recent first)
+      // 3️⃣ Sort messages by their createdAt field in descending order (latest first)
       { $sort: { 'messages.createdAt': -1 } },
 
-      // 4. Re-group the documents back into a single document with a `messages` array,
-      //    now sorted by most recent first
+      // 4️⃣ Group the messages back into an array after sorting
       {
         $group: {
-          _id: '$_id',
-          messages: { $push: '$messages' }, // re-build the array from sorted docs
+          _id: '$_id',               // Group by user ID
+          messages: { $push: '$messages' }, // Rebuild sorted messages array
         },
       },
-    ]).exec(); // Execute the aggregation query
+    ]).exec(); // 🔁 Execute aggregation query
 
-    // Now `user[0].messages` contains all messages sorted by `createdAt` DESC
 
 
     if(!user || user.length===0){

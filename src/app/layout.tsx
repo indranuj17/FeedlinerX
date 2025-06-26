@@ -8,7 +8,7 @@ import { Toaster } from 'sonner';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'True Feedback',
+  title: 'FeedLinerX',
   description: 'Real feedback from real people.',
 };
 
@@ -22,7 +22,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
       <AuthProvider>
         <body className={inter.className}>
           {children}
-          <Toaster />
+          <Toaster position='top-center'/>
         </body>
       </AuthProvider>
     </html>

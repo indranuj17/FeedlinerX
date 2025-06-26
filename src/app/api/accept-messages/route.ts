@@ -1,7 +1,7 @@
 // Importing session utility from NextAuth to access the current logged-in user
 import { getServerSession } from 'next-auth/next';
 // Custom auth config
-import { authOptions } from '@/app/api/auth/[...nextauth]/options';
+import { authOptions } from '../auth/[...nextauth]/option'; 
 // MongoDB connection helper
 import dbConnect from '@/lib/db';
 // Mongoose user model
@@ -29,7 +29,8 @@ export async function POST(request: Request) {
 
   // Extract user ID and request body
   const userId = user?._id;
-  const { acceptMessages } = await request.json(); // expect JSON: { acceptMessages: boolean }
+
+  const { acceptMessages } = await request.json(); // expect JSON: { acceptMessages: boolean }//this will come from client if he toggles to accep messages or not
 
   try {
     // Update the user’s message accepting status

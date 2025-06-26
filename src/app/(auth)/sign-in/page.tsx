@@ -68,6 +68,7 @@ export default function SignInForm() {
     }
 
    if(result?.url){
+    toast.success("Logged In Successfully !",{description:"Welcome Back to FeedLinerX"})
       router.replace("/dashboard");
    }
   }
