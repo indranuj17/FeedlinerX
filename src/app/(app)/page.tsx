@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import React, { useState } from 'react'
 import {
   Carousel,
   CarouselContent,
@@ -16,10 +16,44 @@ import { Mail } from 'lucide-react';
 import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
+import { useRouter } from 'next/navigation';
+import axios, { AxiosError } from 'axios';
+import { ApiResponse } from '@/types/ApiResponse';
+import {toast, Toaster} from "sonner"
 
 const HomePage = () => {
 
   const {data:session}=useSession();
+  const [username , setUsername]=useState(' ');
+  const router=useRouter();
+
+
+  const handleSendMessage=async ()=>{
+    
+    try {
+      console.log(username);
+      const response=await axios.get("/api/checkUsername",
+        {params:{username}
+    });
+       if(response.data.success){
+        if(username.trim()){
+        router.push(`/u/${username.trim()}`);
+      }
+    }
+    
+    } catch (error) {
+      const axiosError=error as AxiosError<ApiResponse>
+       if (axiosError.response?.status === 404) {
+      toast.error("Failed to fetch User", {
+        description: axiosError.response.data.message,
+      });
+    } else {
+      toast.error("Error", {
+        description: axiosError.response?.data.message || axiosError.message,
+      });
+    }
+  }
+};
 
   return (
     <>
@@ -65,22 +99,50 @@ const HomePage = () => {
         </Carousel>
 
 
-          <div className='mt-4 flex  flex-col justify-center'>
-             <h2 className="text-3xl md:text-3xl font-extrabold tracking-tight">
-          Speak Freely, Stay Anonymous
-          </h2>
-             <h2 className=" text-center text-2xl md:text-2xl font-bold tracking-tight">
-         Unmask the Truth, Stay Hidden
-          </h2>
+    <div className="mt-4 flex flex-col items-center justify-center">
+  <h2 className="text-3xl text-gray-300 font-extrabold tracking-tight text-center">
+    Speak Freely, Stay Anonymous
+  </h2>
+  <h2 className="text-2xl text-gray-300 font-bold tracking-tight text-center mt-2">
+    Unmask the Truth, Stay Hidden
+  </h2>
+{session? (<div className="mt-6 w-full max-w-md px-4 sm:px-0">
+    <div className="flex flex-col sm:flex-row gap-3">
+      <input
+        type="text"
+        value={username}
+        placeholder='Enter a username (e.g. Indranuj)'
+        onChange={(e) => setUsername(e.target.value)}
+        className="flex-1 px-4 py-2 rounded-md border border-gray-300 text-black focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
+      <Button
+        className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-md"
+        onClick={handleSendMessage}
+      >
+        Send Message
+      </Button>
+    </div>
+  </div>) : (<div className="mt-6 w-full max-w-md px-4 sm:px-0">
+    <div className="flex flex-col sm:flex-row gap-3">
+      <input
+        type="text"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+        placeholder="Enter a username (e.g. Indranuj)"
+        className="flex-1 px-4 py-2 rounded-md border border-gray-300 text-black focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
+      <Link href="/sign-in">
+       <Button
+        className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-md">
+        Send Message
+        </Button>
+     </Link>
+      
+    </div>
+  </div>)}
+  
+</div>
 
-          {/* {session? 
-          (<Link  href='/u'>
-          <Button></Button></Link>)
-          :() 
-          
-          } */}
-
-          </div>
         
       </main>
     </>
