@@ -17,6 +17,7 @@ import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { Switch } from '@/components/ui/switch';
 import { User } from 'next-auth';
+import Messages from "@/messages.json"
 
 
 
@@ -130,7 +131,6 @@ function UserDashboard() {
 
     
 const handleSwitchChange=async()=>{
-  
     try {
          const response = await axios.post<ApiResponse>('/api/accept-messages', {
             acceptMessages: !acceptMessages,
@@ -230,8 +230,8 @@ const copyToClipboard = () => {
 
       {/* Messages */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {messages.length > 0 ? (
-          messages.map((message) => (
+        {Messages.length > 0 ? (
+          Messages.map((message) => (
             <MessageCard
               key={message._id}
               message={message}

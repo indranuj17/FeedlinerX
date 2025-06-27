@@ -47,31 +47,35 @@ export default function SignInForm() {
 
 
   
+const onSubmit = async (data: z.infer<typeof signInSchema>) => {
+  const result = await signIn('credentials', {
+    redirect: false,
+    callbackUrl:"/",
+    identifier: data.identifier,
+    password: data.password,
+  });
 
-  const onSubmit=async (data:z.infer<typeof signInSchema>)=>{
-    const result=await signIn('credentials',
-        { 
-            redirect:false,
-            identifier:data.identifier,
-            password:data.password
-           
-        }
-    )
-
-    if(result?.error){
-        if(result.error==='CredentialsSignin'){
-            toast.error("Login Failed",{description:"Incorrect Email or Password"});
-        }
-        else{
-            toast.error("Error",{description:result.error});
-        }
+  if (result?.error) {
+    if (result.error === 'CredentialsSignin') {
+      toast.error('Login Failed', {
+        description: 'Incorrect Email or Password',
+      });
+    } else {
+      toast.error('Error', {
+        description: result.error,
+      });
     }
+  } else if (result?.ok && result.url) {
+    toast.success('Logged In Successfully!', {
+      description: 'Welcome Back to FeedLinerX',
+    });
 
-   if(result?.url){
-    toast.success("Logged In Successfully !",{description:"Welcome Back to FeedLinerX"})
-      router.replace("/dashboard");
-   }
+    // Small delay to let toast show (optional)
+    setTimeout(() => {
+      router.replace('/'); // or use router.replace('/')
+    }, 800);
   }
+};
 
 
   return (
