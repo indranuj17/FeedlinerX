@@ -25,8 +25,8 @@ function Navbar() {
         {/* Welcome message */}
         {user && (
           <div>
-            <span className="text-sm text-zinc-300 hidden sm:inline">
-              Welcome, <strong>{user.username || user.email}</strong>
+            <span className="text-lg text-zinc-300 hidden sm:inline">
+              Welcome feed-master <strong className='font-serif'>{user.username || user.email}</strong>
             </span>
           </div>
         )}
@@ -43,20 +43,27 @@ function Navbar() {
               <Button
                 onClick={() => signOut()}
                 variant="outline"
-                className="bg-white rounded-lg text-black hover:bg-blue-600 hover:text-white transition duration-200 rounded-lg shadow-sm font-medium"
+                className="bg-white rounded-lg text-black hover:bg-blue-600 hover:text-white transition duration-200 hover:rounded-lg shadow-sm font-medium"
               >
                 Logout
               </Button>
             </>
           ) : (
+            <>
+            <Link href="/sign-in">
+                <Button className="bg-white text-gray-800 border border-blue-600 hover:bg-blue-600 hover:text-white transition duration-200 rounded-lg shadow-sm font-medium">
+                  Visit Dashboard
+                </Button>
+              </Link>
             <Link href="/sign-in">
               <Button
                 variant="outline"
-                className="bg-white rounded-lg text-black hover:bg-zinc-200 transition"
+                className="bg-white rounded-lg text-black hover:bg-blue-600 hover:text-white transition duration-200 hover:rounded-lg shadow-sm font-medium"
               >
                 Login
               </Button>
             </Link>
+            </>
           )}
         </div>
       </div>

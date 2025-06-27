@@ -13,11 +13,17 @@ import Autoplay from 'embla-carousel-autoplay';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import messages from '@/messages.json';
 import { Mail } from 'lucide-react';
+import { useSession } from 'next-auth/react';
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
 
 const HomePage = () => {
+
+  const {data:session}=useSession();
+
   return (
     <>
-      <main className="flex-grow flex flex-col items-center justify-center px-4 md:px-12 py-16 bg-gradient-to-br from-gray-900 to-gray-800 text-white min-h-screen">
+      <main className="flex-grow flex flex-col items-center justify-center px-4 pt-2  md:px-12 py-16 bg-gradient-to-br from-gray-900 to-gray-800 text-white min-h-screen">
         {/* Hero Section */}
         <section className="text-center mb-12">
           <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight">
@@ -31,7 +37,7 @@ const HomePage = () => {
         {/* Carousel Section */}
         <Carousel
           plugins={[Autoplay({ delay: 2000 })]}
-          className="w-full max-w-6xl"
+          className="w-full max-w-6xl mb-3"
         >
           <CarouselContent>
             {messages.map((message, index) => (
@@ -57,6 +63,25 @@ const HomePage = () => {
           <CarouselPrevious />
           <CarouselNext />
         </Carousel>
+
+
+          <div className='mt-4 flex  flex-col justify-center'>
+             <h2 className="text-3xl md:text-3xl font-extrabold tracking-tight">
+          Speak Freely, Stay Anonymous
+          </h2>
+             <h2 className=" text-center text-2xl md:text-2xl font-bold tracking-tight">
+         Unmask the Truth, Stay Hidden
+          </h2>
+
+          {/* {session? 
+          (<Link  href='/u'>
+          <Button></Button></Link>)
+          :() 
+          
+          } */}
+
+          </div>
+        
       </main>
     </>
   );
