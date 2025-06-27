@@ -230,8 +230,8 @@ const copyToClipboard = () => {
 
       {/* Messages */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {Messages.length > 0 ? (
-          Messages.map((message) => (
+        {messages.length > 0 ? (
+          messages.map((message) => (
             <MessageCard
               key={message._id}
               message={message}
