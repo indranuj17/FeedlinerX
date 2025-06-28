@@ -1,27 +1,52 @@
 [
   {
-    "title": "Message from User123",
-    "content": "Hey, how are you doing today?",
-    "received": "10 minutes ago"
+    "title": "Message from RetroKing",
+    "content": "Do you still play those classic arcade games?",
+    "received": "5 minutes ago"
   },
   {
-    "title": "Message from SecretAdmirer",
-    "content": "I really liked your recent post!",
+    "title": "Message from BookNerd",
+    "content": "Got any good mystery books to recommend?",
+    "received": "14 minutes ago"
+  },
+  {
+    "title": "Message from PixelWitch",
+    "content": "Which retro console did you grow up with?",
+    "received": "30 minutes ago"
+  },
+  {
+    "title": "Message from SoundWave",
+    "content": "What’s your all-time favorite song lyric?",
+    "received": "1 hour ago"
+  },
+  {
+    "title": "Message from ChillCoder",
+    "content": "How do you stay motivated while coding?",
     "received": "2 hours ago"
   },
   {
-    "title": "Message from MysteryGuest",
-    "content": "Do you have any book recommendations?",
+    "title": "Message from AstroNerd",
+    "content": "Do you believe in life beyond Earth?",
+    "received": "3 hours ago"
+  },
+  {
+    "title": "Message from ByteBelle",
+    "content": "What’s one app you can’t live without?",
+    "received": "6 hours ago"
+  },
+  {
+    "title": "Message from DeepThinker",
+    "content": "Ever had a dream you couldn’t forget?",
+    "received": "11 hours ago"
+  },
+  {
+    "title": "Message from ZenMaster",
+    "content": "How do you usually deal with stress?",
     "received": "1 day ago"
   },
   {
-    "title": "Message from MysteryGuest",
-    "content": "Do you have any book recommendations?",
-    "received": "1 day ago"
-  },
-  {
-    "title": "Message from MysteryGuest",
-    "content": "Do you have any book recommendations?",
-    "received": "1 day ago"
+    "title": "Message from CloudDrift",
+    "content": "Where would you travel if money wasn’t a problem?",
+    "received": "2 days ago"
   }
 ]
