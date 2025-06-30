@@ -8,12 +8,17 @@ import mongoose, { Schema, Document } from 'mongoose';
 // Extends Document to inherit Mongoose document functionality (like .save()).
 // Used for typing when working with MessageSchema in a TypeScript-safe way.
 export interface Message extends Document {
+  _id:mongoose.Types.ObjectId,
   content: string;
   createdAt: Date;
 }
 
 // Define the Message schema using Mongoose
 const MessageSchema: Schema<Message> = new mongoose.Schema({
+    _id: {
+    type: mongoose.Schema.Types.ObjectId,
+    default: () => new mongoose.Types.ObjectId(),  // ensures consistent ObjectId format
+  },
   content: {
     type: String,         // Message text content
     required: true,       // This field must be provided

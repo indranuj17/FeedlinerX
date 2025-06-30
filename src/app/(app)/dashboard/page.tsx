@@ -17,6 +17,7 @@ import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { Switch } from '@/components/ui/switch';
 import { User } from 'next-auth';
+import mongoose from 'mongoose';
 
 
 
@@ -29,9 +30,11 @@ function UserDashboard() {
     const [isLoading, setIsLoading] = useState(false);
     const [isSwitchLoading, setIsSwitchLoading] = useState(false);
 
-    // Handler to delete a message by ID
+
+
+    // Handler to delete a message by ID--->UI handeling....after informed by onMessageDelete in MessageCard who sent api request to backend to delete
     const handleDeleteMessages = (messageId: string) => {
-        setMessages(messages.filter((message) => message._id !== messageId));
+        setMessages(messages.filter((message) => message._id.toString() !== messageId));
     };
 
 

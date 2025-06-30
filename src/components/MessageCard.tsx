@@ -21,32 +21,45 @@ import { Button } from './ui/button';
 import {toast,Toaster} from "sonner";
 import { ApiResponse } from '@/types/ApiResponse';
 
+// Define the type for props expected by the MessageCard component
 type MessageCardProps = {
-  message: Message;
-  onMessageDelete: (messageId: string) => void;
+  message: Message; // The actual message object to display (includes _id, content, etc.)
+  onMessageDelete: (messageId: string) => void; // Callback to notify parent component after deletion
 };
 
+// Functional React component to render each individual message card
 export function MessageCard({ message, onMessageDelete }: MessageCardProps) {
 
 
+
+  
+  // Function to handle delete confirmation logic
   const handleDeleteConfirm = async () => {
     try {
+      // Make an API call to delete the message by its ID
       const response = await axios.delete<ApiResponse>(
-        `/api/delete-message/${message._id}`
+        `/api/delete-message/${message._id}` // endpoint includes the message ID
       );
-      toast.success("Message Deleted",{description:response.data.message});
-      onMessageDelete(message._id);
+
+      // If successful, show a toast notification to the user
+      toast.success("Message Deleted", {
+        description: response.data.message,
+      });
+
+      // Inform the parent component to remove this message from UI state
+      onMessageDelete(message._id.toString());
 
     } catch (error) {
+      // If the request fails, cast error to AxiosError for type safety
       const axiosError = error as AxiosError<ApiResponse>;
-      toast.error(
-         'Error',
-        {description:
-          axiosError.response?.data.message ?? 'Failed to delete message',
-        }
-      );
+
+      // Show an error toast with the message from the server, if available
+      toast.error('Error', {
+        description: axiosError.response?.data.message ?? 'Failed to delete message',
+      });
     } 
   };
+
 
   return (
     <Card className="card-bordered ">
