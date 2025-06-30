@@ -33,8 +33,8 @@ export async function GET(request: Request) {
       { status: 200 }
     );
 
-  } catch (error: any) {
-    console.error("Error in checkUsername route:", error.message);
+  } catch (error) {
+    console.error(error);
     return Response.json(
       { success: false, message: "Internal Server Error" },
       { status: 500 }

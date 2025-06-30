@@ -2,10 +2,10 @@
 'use client'; // Ensures this component runs on the client side
 import React from 'react'
 // Import necessary dependencies
-import { ApiResponse } from '@/types/ApiResponse';
+
 import { zodResolver } from '@hookform/resolvers/zod';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 
@@ -18,22 +18,15 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { toast, Toaster } from 'sonner'; // Toast notifications
+import { toast } from 'sonner'; // Toast notifications
 
-import { Loader2 } from 'lucide-react';
+
 import { useRouter } from 'next/navigation';
 
 import { signInSchema } from '@/schemas/signInSchema';
 import { signIn } from 'next-auth/react';
-import Credentials from 'next-auth/providers/credentials';
 
 export default function SignInForm() {
-  // Local states
-  const [username, setUsername] = useState('');
-  const [usernameMessage, setUsernameMessage] = useState('');
-  const [isCheckingUsername, setIsCheckingUsername] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
   const router = useRouter();
 
   // Initialize React Hook Form with Zod schema

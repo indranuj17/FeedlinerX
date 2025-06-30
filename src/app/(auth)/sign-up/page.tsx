@@ -17,7 +17,7 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { toast, Toaster } from 'sonner'; // Toast notifications
+import { toast } from 'sonner'; // Toast notifications
 import axios, { AxiosError } from 'axios';
 import { Loader2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';

@@ -69,7 +69,7 @@ export async function POST(request: Request) {
 
 
 // ======================= GET: Check If User Accepts Messages ======================= //
-export async function GET(request: Request) {
+export async function GET() {
   // Connect to DB
   await dbConnect();
 

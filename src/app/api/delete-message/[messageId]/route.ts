@@ -2,7 +2,7 @@ import dbConnect from "@/lib/db";
 import UserModel from "@/models/User";
 import { authOptions } from "../../auth/[...nextauth]/option"; 
 import { getServerSession } from "next-auth";
-import { User } from "next-auth";
+
 import mongoose from "mongoose";
 
 
@@ -56,8 +56,8 @@ export async function DELETE(
       { success: true, message: "Message Deleted Successfully" },
       { status: 200 }
     );
-  } catch (error: any) {
-    console.error("❌ Error in DELETE route:", error.message);
+  } catch (error) {
+    console.error(error);
     return Response.json(
       { success: false, message: "Internal Server Error" },
       { status: 500 }

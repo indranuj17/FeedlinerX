@@ -18,7 +18,8 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { ApiResponse } from '@/types/ApiResponse';
 
-export default function verifyAccount() {
+
+export default function VerifyAccount() {
   const router = useRouter(); // Used for programmatic navigation
   const params = useParams<{ username: string }>(); // Extracts `username` from URL, e.g., /verify/[username]
 
