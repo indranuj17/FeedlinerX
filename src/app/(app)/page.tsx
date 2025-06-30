@@ -19,7 +19,7 @@ import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
 import axios, { AxiosError } from 'axios';
 import { ApiResponse } from '@/types/ApiResponse';
-import {toast, Toaster} from "sonner"
+import {toast} from "sonner"
 
 const HomePage = () => {
 
@@ -64,7 +64,7 @@ const HomePage = () => {
             Dive into Anonymous Feedback
           </h1>
           <p className="mt-4 text-lg md:text-xl text-gray-300">
-            FeedLinerX - Where your voice matters, your identity doesn't.
+            FeedLinerX - Where your voice matters, your identity does not.
           </p>
         </section>
 

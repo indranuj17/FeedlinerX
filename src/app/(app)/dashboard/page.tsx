@@ -9,15 +9,15 @@ import axios, { AxiosError } from 'axios';
 import { useSession } from 'next-auth/react';
 import React, { useCallback, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form';
-import { toast, Toaster } from 'sonner'; // Toast notifications
-import { z } from 'zod';
+import { toast } from 'sonner'; // Toast notifications
+
 import { MessageCard } from '@/components/MessageCard';
 import { Copy, Loader2, RefreshCcw } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { Switch } from '@/components/ui/switch';
 import { User } from 'next-auth';
-import mongoose from 'mongoose';
+
 
 
 
@@ -236,7 +236,7 @@ const copyToClipboard = () => {
         {messages.length > 0 ? (
           messages.map((message) => (
             <MessageCard
-              key={message._id}
+              key={message._id.toString()}
               message={message}
               onMessageDelete={handleDeleteMessages}
             />

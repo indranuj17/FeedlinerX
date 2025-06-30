@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react';
+
 import axios, { AxiosError } from 'axios';
 import dayjs from 'dayjs';
 import { X } from 'lucide-react';
@@ -18,7 +18,7 @@ import {
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
 import { Button } from './ui/button';
-import {toast,Toaster} from "sonner";
+import {toast} from "sonner";
 import { ApiResponse } from '@/types/ApiResponse';
 
 // Define the type for props expected by the MessageCard component
@@ -32,7 +32,7 @@ export function MessageCard({ message, onMessageDelete }: MessageCardProps) {
 
 
 
-  
+
   // Function to handle delete confirmation logic
   const handleDeleteConfirm = async () => {
     try {
