@@ -22,7 +22,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
       <AuthProvider>
         <body className={inter.className}>
           {children}
-          <Toaster position='top-center'/>
+          <Toaster richColors position='top-center'/>
         </body>
       </AuthProvider>
     </html>
